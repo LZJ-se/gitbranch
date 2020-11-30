@@ -10,3 +10,11 @@ db.query("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT
 const path = new Router()
 
 path.get('/login', test.loginUI)
+
+const session = new Session({ framework: "oak" });
+await session.init();
+
+const posTest = new Application();
+posTest.use(session.use()(session))
+posTest.use(path.routes())
+posTest.use(path.allowedMethods())
