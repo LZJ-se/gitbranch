@@ -9,7 +9,8 @@ DataStore.query("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOIN
 
 const path = new Router()
 
-path.get('/login', test.loginUI)
+path.get('/login', loginUI)
+    .post('/login', )
 
 const session = new Session({ framework: "oak" });
 await session.init();
@@ -22,5 +23,7 @@ posTest.use(path.allowedMethods())
 async function loginUI(ctx){
     ctx.response.body = await test.loginUI()
 }
+
+console.log('Server run at http://127.0.0.1:8000')
 
 await posTest.listen({ hostname : "127.0.0.1", port : 8000});
